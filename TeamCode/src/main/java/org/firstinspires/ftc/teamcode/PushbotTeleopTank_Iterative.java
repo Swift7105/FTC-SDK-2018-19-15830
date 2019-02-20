@@ -28,35 +28,21 @@
  */
 
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
-/**
- * This file provides basic Telop driving for a Pushbot robot.
- * The code is structured as an Iterative OpMode
- *
- * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
- * All device access is managed through the HardwarePushbot class.
- *
- * This particular OpMode executes a basic Tank Drive Teleop for a PushBot
- * It raises and lowers the claw using the Gampad Y and A buttons respectively.
- * It also opens and closes the claws slowly using the left and right Bumper buttons.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
-
 @TeleOp(name="Pushbot: Teleop Tank", group="Pushbot")
-//@Disabled
+//@Disableds
 public class PushbotTeleopTank_Iterative extends OpMode{
 
+
     /* Declare OpMode members. */
-    org.firstinspires.ftc.teamcode.HardwarePushbot robot       = new org.firstinspires.ftc.teamcode.HardwarePushbot(); // use the class created to define a Pushbot's hardware
+    HardwareRobot robot       = new HardwareRobot(); // use the class created to define a Pushbot's hardware
 
 
     /*
@@ -105,7 +91,16 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         robot.LeftBackDrive.setPower(left);
         robot.RightFrontDrive.setPower(right);
         robot.RightBackDrive.setPower(right);
+        robot.Lift.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+        //robot.Intake.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+        robot.Arm.setPower(gamepad2.left_stick_x -  gamepad2.right_stick_y);
+/*        // right makes it go down.
+        robot.ScrewDrive.setPower(left);
+        //left makes it go up.//
+        robot.ScrewDrive.setPower(right);
+        robot.ScrewDrive.setPower(left);
 
+*/
 
 
 

@@ -29,17 +29,18 @@
 
 package org.firstinspires.ftc.teamcode;
 
+ import com.qualcomm.robotcore.hardware.DcMotorSimple;
+//import com.qualcomm.robotcore.hardware.Servo;
+//import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This is NOT an opmode.
  *
  * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Pushbot.
+ * In this case that robot is a Pushbot.s
  * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
  *
  * This hardware class assumes the following device names have been configured on the robot:
@@ -49,15 +50,27 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Motor channel:  Right drive motor:        "right_drive"
  * Motor channel:  Manipulator drive motor:  "left_arm"
  * Servo channel:  Servo to open left claw:  "left_hand"
+ *
+ *
+ * +++++++++++++++++++++++++
  * Servo channel:  Servo to open right claw: "right_hand"
  */
-public class HardwarePushbot
+public class HardwareRobot
 {
     /* Public OpMode members. */
     public DcMotor  LeftFrontDrive   = null;
     public DcMotor  RightFrontDrive  = null;
     public DcMotor  LeftBackDrive     = null;
     public DcMotor  RightBackDrive = null;
+    public DcMotor Arm = null;
+    public DcMotor Lift = null;
+
+
+
+  //  public Servo Door = null;
+  //  public CRServo Intake = null;
+ //   public CRServo Slider = null;
+  //  public CRServo arm2 = null;
 
 
 
@@ -67,7 +80,7 @@ public class HardwarePushbot
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwarePushbot(){
+    public HardwareRobot(){
 
     }
 
@@ -81,31 +94,65 @@ public class HardwarePushbot
         LeftBackDrive  = hwMap.get(DcMotor.class, "Left_Back_Drive");
         RightFrontDrive  = hwMap.get(DcMotor.class, "Right_Front_Drive");
         RightBackDrive  = hwMap.get(DcMotor.class, "Right_Back_Drive");
+        Arm = hwMap.get(DcMotor.class, "Arm");
+        Lift = hwMap.get(DcMotor.class, "Lift");
+
+
+        //Door = hwMap.get(Servo.class,"Door");
+       // Slider = hwMap.get(CRServo.class, "Slider");
+       // arm2 = hwMap.get(CRServo.class, "arm2");
+       // Intake = hwMap.get(CRServo.class,"Intake");
 
 
         // Set all motors to zero power
         LeftFrontDrive.setPower(0);
         RightFrontDrive.setPower(0);
+        RightBackDrive.setPower(0);
         LeftBackDrive.setPower(0);
-        LeftBackDrive.setPower(0);
+        Arm.setPower(0);
+        Lift.setPower(0);
+        /*
+        Arm.setPower(0);
+        Lift.setPower(0);
+        Intakearm.setPower(0);
+        */
+
+        //Door.setPosition(0);
+        //Slider.setPower(0);
+        //arm2.setPower(0);
 
 
-        LeftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        LeftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        RightBackDrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        RightFrontDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        LeftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        LeftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        RightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        RightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        Lift.setDirection(DcMotor.Direction.FORWARD);
+        Arm.setDirection(DcMotor.Direction.FORWARD);
+        /*
+        Arm.setDirection(DcMotorSimple.Direction.FORWARD);
+        Lift.setDirection(DcMotorSimple.Direction.REVERSE);
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+*/
 
 
 
-        // Set all motors to run without encoders.
+        // Set all motors to run withoutcoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         LeftFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         LeftBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         RightFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         RightBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
+      /*
+        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+*/
 
     }
- }
+
+}
 
